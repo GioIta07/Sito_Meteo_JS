@@ -14,11 +14,11 @@ btn.addEventListener('click', async () => {
 
   try {
     // 1. Geocoding per lat/lon
-      //
+      //Codifica la citta,fa richiesta al API transforma la risposta in Json 
     const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=it&format=json`;
     const geoResp = await fetch(geoUrl);
     const geoData = await geoResp.json();
-
+      //Controlla se l’API ha trovato almeno una città.
     if (!geoData.results || geoData.results.length === 0) {
       resultDiv.innerHTML = '<p>Città non trovata.</p>';
       return;
@@ -31,7 +31,7 @@ btn.addEventListener('click', async () => {
     const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m&timezone=auto`;
     const weatherResp = await fetch(weatherUrl);
     const weatherData = await weatherResp.json();
-      //Quindi o ottenuto solo questi dati
+      //ottenuto questi dati 
     const times = weatherData.hourly.time;
     const temps = weatherData.hourly.temperature_2m;
 
